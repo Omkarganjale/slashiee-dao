@@ -1,1 +1,3 @@
 # slashiee-dao
+
+We are “Slashiee.com” inspiring as a Web3 company creating new identity “Slashiee” in this world. For individuals, who has various key skills and would like to enjoy colourful lifestyle and work style rather than single boring 9-5 job. Our target to cover users in between IG  and LinkedIn. Slashiees can be multi skills and hobby from coding, coaching, discord management, goods delivery, 1:1 tutorial, trainers, esport streamers, handyman, builder, travel expert, carpenter to professional SME freelancer and assets investors. We are creating multiple communities to facilitate communication, match and closing transaction. It will be one of the best DAO community in town.!!!
