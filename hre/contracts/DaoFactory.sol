@@ -34,28 +34,29 @@ contract DaoFactory is Ownable{
         _;
     }
 
+    modifier isDaoAdmin(TeamDAO _dao){
+        require(_dao.admin()==address(this), "NOT_ADMIN");
+        _;
+    }
+
     function createTeamDao(bytes32 _title, bytes32 _description, address[] memory _members) public returns(TeamDAO){
         TeamDAO newCont = new TeamDAO(address(this), _title, _description, _members);
         return newCont;
     }
 
-    function editDaoDetails(TeamDAO _dao, bytes32 _title, bytes32 _description) public onlyOwner {
-        require(_dao.admin==address(this), "NOT_ADMIN");
+    function editDaoDetails(TeamDAO _dao, bytes32 _title, bytes32 _description) public onlyOwner isDaoAdmin(_dao){
         _dao.editDetails(_title, _description);
     }
 
-    function setAdmin(TeamDAO _dao, address _newAdmin) public onlyOwner {
-        require(_dao.admin==address(this), "NOT_ADMIN");
+    function setAdmin(TeamDAO _dao, address _newAdmin) public onlyOwner isDaoAdmin(_dao){
         _dao.setAdmin(_newAdmin);
     }
 
-    function addMemberTo(TeamDAO _dao, address _newMember) public onlyOwner {
-        require(_dao.admin==address(this), "NOT_ADMIN");
+    function addMemberTo(TeamDAO _dao, address _newMember) public onlyOwner isDaoAdmin(_dao){
         _dao.addMember(_newMember);
     }
 
-    function rmMemberFrom(TeamDAO _dao, address _deserter) public onlyOwner {
-        require(_dao.admin==address(this), "NOT_ADMIN");
+    function rmMemberFrom(TeamDAO _dao, address _deserter) public onlyOwner isDaoAdmin(_dao){
         _dao.rmMember(_deserter);
     }
 
