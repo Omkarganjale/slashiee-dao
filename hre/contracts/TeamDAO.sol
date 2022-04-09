@@ -15,7 +15,7 @@ contract TeamDAO{
         for(uint i=0; i<sz; i++){
             members[_members[i]]=true;
         }
-        setAdmin(_admin);
+        admin=_admin;
     }
 
     modifier onlyAdmin(){

@@ -22,7 +22,7 @@ contract DaoFactory is Ownable{
         bytes32 description;
     }
 
-    uint pCnt; // proposal count
+    uint public pCnt; // proposal count
     mapping(uint => Proposal) proposals;
 
     constructor(){
@@ -35,7 +35,7 @@ contract DaoFactory is Ownable{
     }
 
     modifier isDaoAdmin(TeamDAO _dao){
-        require(_dao.admin()==address(this), "NOT_ADMIN");
+        require(_dao.admin()==address(this), "NOT_DAO_ADMIN");
         _;
     }
 
