@@ -40,18 +40,22 @@ contract DaoFactory is Ownable{
     }
 
     function editDaoDetails(TeamDAO _dao, bytes32 _title, bytes32 _description) public onlyOwner {
+        require(_dao.admin==address(this), "NOT_ADMIN");
         _dao.editDetails(_title, _description);
     }
 
     function setAdmin(TeamDAO _dao, address _newAdmin) public onlyOwner {
+        require(_dao.admin==address(this), "NOT_ADMIN");
         _dao.setAdmin(_newAdmin);
     }
 
     function addMemberTo(TeamDAO _dao, address _newMember) public onlyOwner {
+        require(_dao.admin==address(this), "NOT_ADMIN");
         _dao.addMember(_newMember);
     }
 
     function rmMemberFrom(TeamDAO _dao, address _deserter) public onlyOwner {
+        require(_dao.admin==address(this), "NOT_ADMIN");
         _dao.rmMember(_deserter);
     }
 
@@ -85,15 +89,9 @@ contract DaoFactory is Ownable{
 
       
 }
-//x CreateTeamDaoContract() return address
-//x AddTeamBasicInfoToContract(Title,Description)
-//x AddTeamMember(MemberAddress) - array/map of member’s address, add one by one
-//x SetSuperAdmin(MemberAddress)
-//x AddProposalDetails (ServiceContractAddress) return proposalitemID- link it to Service.sol contract
+
 // BidService(ServiceContractAddress)
-//x GetProposalDetail(proposalItemID)
 // GetTeamMemberAddress()
-//x VoteForProposal(Yes/No, ProposalItemID)
 // ListProposalDetails()
 // ExecuteProposal
 
