@@ -1,9 +1,9 @@
-import { hot } from 'react-hot-loader';
-import React from 'react';
-import AppRouter from './routes';
+import Routers from './Router'
 
-const App = () => {
-  return <AppRouter />;
-};
+function App() {
+  return (
+      <Routers />
+  );
+}
 
-export default hot(module)(App);
+export default App;
