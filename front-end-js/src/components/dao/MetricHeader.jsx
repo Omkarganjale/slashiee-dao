@@ -55,17 +55,17 @@ const MetricHeader = ({
   }}>
     
     <Box justifyContent="flex-end" flexDirection="column" textAlign="center">
-     <H3>40</H3>
+     <H3>{user ==0? "-" : "4"}</H3>
      <H3>Open</H3>
      </Box>
 
      <Box justifyContent="flex-end" flexDirection="column" textAlign="center">
-     <H3>63</H3>
+     <H3>{user == 0 ? "-" : "63"}</H3>
      <H3>On Going</H3>
      </Box>
 
      <Box justifyContent="flex-end" flexDirection="column" textAlign="center">
-     <H3>101</H3>
+     <H3>{user ==0 ? "-" : "101"}</H3>
      <H3>Total</H3>
      </Box>
      

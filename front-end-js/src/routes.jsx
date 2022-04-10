@@ -65,6 +65,7 @@ const Error = Loadable(lazy(() => import('./pages/404'))); // routes
 //DAO
 const DaoHackDashboard = Loadable(lazy(() => import('./pages/dashboards/DaoHackDashboard')));
 const CreateService = Loadable(lazy(() => import('./pages/forms/CreateService')));
+const ViewService = Loadable(lazy(() => import('./pages/forms/ViewService')));
 
 const routes = [{
   path: '/',
@@ -108,6 +109,11 @@ const routes = [{
   {
     path: 'daocreateservice',
     element: <CreateService />
+  },
+
+  {
+    path: 'daoviewservice',
+    element: <ViewService />
   },
 
   {

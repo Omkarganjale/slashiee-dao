@@ -8,28 +8,83 @@ import { Button, Card, Grid, Modal, styled } from "@mui/material";
 import { FormControl, FormControlLabel, Switch, FormGroup } from '@mui/material';
 import { ethers } from "ethers";
 import React from 'react';
+import { login } from 'utils/loginuser';
+import { createProfile } from 'utils/create-profile';
+import toast from "react-hot-toast";
+import { StyledEngineProvider } from "@mui/styled-engine-sc";
 
 
 const services = [{
-  id: "5e8883f1b51cc1956a5a1ec0",
-  title: "Slack",
-  body: "Email collaboration software",
-  image: "/static/connect-accounts/slack.svg"
-}, {
   id: "5e8883f7ed1486d665d8be1e",
-  title: "Github",
-  body: "Email collaboration software",
-  image: "/static/connect-accounts/github.svg"
-}, {
+  title: "Skillwallet",
+  body: "A wallet that proof your community contribution",
+  image: "/static/daohack/skillwallet.png"
+}
+  ,
+{
+  id: "5e8883fca0e5432144248ecf",
+  title: "Connect Lens",
+  body: "Connect with Lens Profile",
+  image: "/static/daohack/lens.png"
+
+}
+  , {
   id: "5e8883fca0e8612044248ecf",
-  title: "Stack Overflow",
-  body: "Email collaboration software",
-  image: "/static/connect-accounts/stack-overflow.svg"
-}];
+  title: "Discord",
+  body: "Community Engagement",
+  image: "/static/daohack/discord.svg"
+}
+
+
+];
+
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
+/*Use like so*/
+
+async function timeSensativeAction(){ //must be async func
+  //do something here
+  await sleep(5000) //wait 5 seconds
+  //continue on...
+}
+
+async function lensOperation() {
+  toast("Logging in to Lens.");
+  await sleep(1000)
+  
+  login();
+  toast.success("Login to Lens Successfully!");
+  console.log("Login SuccessFul");
+  await sleep(2000)
+  
+ 
+  await sleep(2000)
+  const createProfileRequest = {
+      "handle": "devABTest001",
+      "profilePictureUri": null,
+      "followNFTURI": null,
+      "followModule": null
+    };
+
+
+  const profile = await createProfile(createProfileRequest).catch(error => 
+    {
+      toast.error("Something wrong with Lens Operation. Please try again later.");
+    });
+    toast.success("Profile created successfully.");
+  await sleep(2000)
+
+  console.log("Profile created successfully", profile);
+}
+
 
 const WalletPopover = () => {
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
+
+
 
   // A Web3Provider wraps a standard Web3 provider, which is
   // what MetaMask injects as window.ethereum into each page
@@ -66,6 +121,7 @@ const WalletPopover = () => {
 
 
 
+
   return <Fragment>
     <IconButton ref={anchorRef} onClick={() => setOpen(true)}>
 
@@ -83,7 +139,7 @@ const WalletPopover = () => {
 
     </IconButton>
 
-    <PopoverLayout hiddenViewButton popoverOpen={open} anchorRef={anchorRef} title="Web apps & services" popoverClose={() => setOpen(false)}>
+    <PopoverLayout hiddenViewButton popoverOpen={open} anchorRef={anchorRef} title="DAO Services" popoverClose={() => setOpen(false)}>
       {services.map(service => <ListItem service={service} key={service.id} />)}
     </PopoverLayout>
   </Fragment>;
@@ -106,7 +162,7 @@ function ListItem({
       height: 35
     }} />
 
-    <Box ml={2}>
+    <Box ml={2} onClick={lensOperation}>
       <H6>{service.title}</H6>
       <Tiny display="block" fontWeight={500} color="text.disabled">
         {service.body}

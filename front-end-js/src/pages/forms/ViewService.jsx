@@ -18,9 +18,9 @@ import MetricHeader from "components/dao/MetricHeader";
 import ServiceHeader from "components/dao/ServiceHeader";
 import SlashieeHeader from "components/dao/SlashieeHeader";
 
-const DaoHackDashboard = () => {
+const ViewService = () => {
   // change navbar title
-  useTitle("Home");
+  useTitle("Create Service");
   const theme = useTheme();
   const {
     t
@@ -42,91 +42,16 @@ const DaoHackDashboard = () => {
 
 
 <H3> &nbsp;</H3>
+
       <Grid container spacing={3}>
-        <Grid item xs={12} md={8}>
-          <Card>
-            <Progress />
-            <Divider />
-            <Projects />
-            <Divider />
-            <Teams />
-          </Card>
-
-          <Tasks />
-          
-        </Grid>
-
-        <Grid item xs={12} md={4}>
-          <Card sx={{
-          padding: 3
-        }}>
-            <H5 mb={2}>{t("Recent Activity")}</H5>
-
-            {recentActivity.map(item => <ActivityListItem activity={item} key={item.id} />)}
-          </Card>
-
-          <Box mt={3} />
-
-          <Card sx={{
-          padding: 3
-        }}>
-            <H5>{t("Task Progress")}</H5>
-
-            <Box my={3}>
-              <FlexBox mb={1} alignItems="center" justifyContent="space-between">
-                <H6>{t("Copywriting")}</H6>
-                <Small color="text.disabled">6/10</Small>
-              </FlexBox>
-              <LinearProgress variant="determinate" value={35} color="error" />
-            </Box>
-
-            <Box mt={3}>
-              <FlexBox mb={1} alignItems="center" justifyContent="space-between">
-                <H6>{t("Illustrations")}</H6>
-                <Small color="text.disabled">2/7</Small>
-              </FlexBox>
-              <LinearProgress value={35} color="warning" variant="determinate" />
-            </Box>
-
-            <Box mt={3}>
-              <FlexBox mb={1} alignItems="center" justifyContent="space-between">
-                <H6>{t("UI Design")}</H6>
-                <Small color="text.disabled">3/8</Small>
-              </FlexBox>
-              <LinearProgress variant="determinate" value={35} />
-            </Box>
-          </Card>
-
-          <Box mt={3} />
-
-          <Card sx={{
-          padding: 3
-        }}>
-            <H5 mb={2}>Todo List</H5>
-            {todoList.map(item => <Box mb={3} key={item.id} sx={{
-            "&:last-child": {
-              mb: 0
-            }
-          }}>
-                <TodoItem item={item} handleTodoMore={handleTodoMoreOpen} />
-              </Box>)}
-
-            <MoreOptions anchorEl={todoEl} handleMoreClose={handleTodoMoreClose} />
-          </Card>
-
-          <Box mt={3} />
-
-          <Card sx={{
-          padding: 3,
-          "& .MuiBox-root": {
-            paddingX: 0
-          }
-        }}>
-            <H5 mb={2}>Recent Chats</H5>
-            {conversationList.map((item, index) => <ConversationBox key={index} conversation={item} />)}
-          </Card>
-        </Grid>
+        
+      {/*        
+       TODO: Divsh follow create service to complete form.*/}
+        
+      
       </Grid>
+
+       
     </Box>;
 };
 
@@ -198,4 +123,4 @@ const conversationList = [{
   image: "/static/avatar/069-woman-15.svg",
   time: "11:40pm"
 }];
-export default DaoHackDashboard;
+export default ViewService;
