@@ -14,6 +14,7 @@ import useTitle from "hooks/useTitle";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { H3 } from "components/Typography";
+import MetricHeader from "components/dao/MetricHeader";
 
 const DaoHackDashboard = () => {
   // change navbar title
@@ -31,6 +32,8 @@ const DaoHackDashboard = () => {
   const handleTodoMoreClose = () => setTodoEl(null);
 
   return <Box pt={2} pb={4}>
+
+    
       <Grid container spacing={3}>
       <Grid item md={12} xs={12}>
       <Card sx={{
@@ -45,7 +48,7 @@ const DaoHackDashboard = () => {
               }}>
             <img src="/static/daohack/header.png" height="80px"></img>
             
-            <Button height="80" variant="outlined"  > Propose Service </Button>
+            <Button height="80" variant="outlined"  > Propose a Service </Button>
           </FlexBox>
         </Card>       
         </Grid>
@@ -78,40 +81,11 @@ const DaoHackDashboard = () => {
 
           </Card>
         </Grid>
-        <Grid item md={7} xs={12}>
-          <Card sx={{
-          padding: "3rem 0",
-          margin: "3"
-        }}>
-            
-          <FlexBox flexDirection="row" justifyContent="space-around" width="100%" p="0.5rem 0.8rem 0.5rem 0rem" sx={{
-            [theme.breakpoints.between("sm", 960)]: {
-              flexWrap: "wrap",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              m:30
-            }
-          }}>
-            
-            <Box justifyContent="flex-end" flexDirection="column" textAlign="center">
-             <H3>40</H3>
-             <H3>Open</H3>
-             </Box>
 
-             <Box justifyContent="flex-end" flexDirection="column" textAlign="center">
-             <H3>63</H3>
-             <H3>On Going</H3>
-             </Box>
+        <MetricHeader user="" theme={theme} />
+        
 
-             <Box justifyContent="flex-end" flexDirection="column" textAlign="center">
-             <H3>101</H3>
-             <H3>Total</H3>
-             </Box>
-             
-            </FlexBox>
 
-          </Card>
-        </Grid>
       </Grid>
 
 
