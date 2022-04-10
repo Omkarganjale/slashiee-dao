@@ -3,6 +3,8 @@ import { Fragment, useState } from "react";
 import { Outlet } from "react-router";
 import DashboardNavbar from "./DashboardNavbar";
 import DashboardSidebar from "./DashboardSideBar"; // styled components
+import DaoNavBar from "./DaoNavBar";
+
 
 const Wrapper = styled(Box)(({
   theme,
@@ -40,7 +42,12 @@ const DashboardLayout = ({
 
       <Wrapper show={openSecondarySideBar}>
         <InnerWrapper>
-          <DashboardNavbar sideBarLocked={sideBarLocked} setOpenSecondarySideBar={() => setOpenSecondarySideBar(state => !state)} setSideBarLocked={() => setSideBarLocked(state => !state)} setShowMobileSideBar={() => setShowMobileSideBar(state => !state)} />
+          {/* <DashboardNavbar sideBarLocked={sideBarLocked} 
+          setOpenSecondarySideBar={() => setOpenSecondarySideBar(state => !state)} 
+          setSideBarLocked={() => setSideBarLocked(state => !state)} 
+          setShowMobileSideBar={() => setShowMobileSideBar(state => !state)} 
+          /> */}
+          <DaoNavBar />
           {children || <Outlet />}
         </InnerWrapper>
       </Wrapper>

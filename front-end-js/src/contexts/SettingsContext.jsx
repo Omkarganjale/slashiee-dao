@@ -2,7 +2,7 @@ import useLocalStorage from "hooks/useLocalStorage";
 import { createContext } from "react";
 import { THEMES } from "../constants";
 const initialSettings = {
-  direction: "ltr",
+  direction: "rtr",
   theme: THEMES.LIGHT,
   responsiveFontSizes: true
 };

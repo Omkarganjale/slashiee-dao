@@ -15,6 +15,8 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { H3 } from "components/Typography";
 import MetricHeader from "components/dao/MetricHeader";
+import ServiceHeader from "components/dao/ServiceHeader";
+import SlashieeHeader from "components/dao/SlashieeHeader";
 
 const DaoHackDashboard = () => {
   // change navbar title
@@ -32,60 +34,10 @@ const DaoHackDashboard = () => {
   const handleTodoMoreClose = () => setTodoEl(null);
 
   return <Box pt={2} pb={4}>
-
-    
+     <SlashieeHeader theme={theme}/>
       <Grid container spacing={3}>
-      <Grid item md={12} xs={12}>
-      <Card sx={{
-          p: "1rem 1.5rem 1.5rem 2rem",
-          m: "1rem 0rem 1.4rem 0rem"
-        }}>
-        <FlexBox width="100%" justifyContent="space-between" sx={{
-                [theme.breakpoints.between("sm", 960)]: {
-                
-                  flexDirection: "row",
-                }
-              }}>
-            <img src="/static/daohack/header.png" height="80px"></img>
-            
-            <Button height="80" variant="outlined"  > Propose a Service </Button>
-          </FlexBox>
-        </Card>       
-        </Grid>
-        
-      </Grid>
-
-      <Grid container spacing={3}>
-       
-        <Grid item md={5} xs={12}>
-          <Card sx={{
-          p: "2rem 0",
-          m: "1"
-        }}>
-          
-          <FlexBox width="100%" justifyContent="space-around" sx={{
-            [theme.breakpoints.between("sm", 960)]: {
-           
-              flexDirection: "row",
-            }
-          }}>
-            <H3 m="1.5rem" p="0.5rem 0.8rem 0.5rem 0rem">
-              {t("Our Serivces")}
-            </H3>
-            <H3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</H3>
-            <Box  p="0.5rem 0.8rem 0.5rem 0rem">
-              <img src="/static/daohack/our_service.png"  height="80" />
-            </Box>
-             
-            </FlexBox>
-
-          </Card>
-        </Grid>
-
-        <MetricHeader user="" theme={theme} />
-        
-
-
+        <ServiceHeader user="" theme={theme}/>
+        <MetricHeader  user="" theme={theme}/>
       </Grid>
 
 

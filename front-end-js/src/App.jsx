@@ -28,39 +28,7 @@ const App = () => {
   // const signer = provider.getSigner()
 
 
-  // A Web3Provider wraps a standard Web3 provider, which is
-  // what MetaMask injects as window.ethereum into each page
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const [walletAddress, setWalletAddress] = useState('');
-
-  if (typeof window.ethereum !== 'undefined') {
-    console.log('MetaMask is installed!');
-    
-  }
-  //TODO: error handling
-  async function metamask() {
-    console.log('Connecting');
-    // window.ethereum.request({ method: 'eth_requestAccounts' });
-    // MetaMask requires requesting permission to connect users accounts
-    const accounts = await provider.send("eth_requestAccounts", []).then( (result)=> {
-      setWalletAddress(result[0].slice(0, 8)+ "...");
-    });
-    console.log(accounts);
-    // await console.log(accounts[0]);
-    // setWalletAddress(accounts[0]);
-    
-  }
-
-  async function disconnect_metamask(){
-    console.log('disconnecting');
-    // window.ethereum.on('disconnect', handler: (error: ProviderRpcError) => void);
-
-    const accounts = await provider.send("eth_requestAccounts",
-        [{eth_accounts: {}}]).then( (result)=> {
-          setWalletAddress(result[0]);
-        });
-  }
-
+  
   window.ethereum.on('accountsChanged', function (accounts) {
     // Time to reload your interface with accounts[0]!
     console.warn('account changed');
@@ -90,13 +58,7 @@ const App = () => {
         <RTL direction={appTheme.direction}>
           <CssBaseline />
           <Toaster toastOptions={toasterOptions} />
-          <Grid container justifyContent="flex-end">
-            {walletAddress.length > 0 ? 
-            <Button>{walletAddress}</Button>
-            :
-            <Button variant="contained" onClick={metamask}>Connect wallet</Button>
-            }
-          </Grid>
+          
 
 
           {allPages}
