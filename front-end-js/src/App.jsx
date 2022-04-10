@@ -8,8 +8,8 @@ import "./i18n";
 import routes from "./routes";
 import { ukoTheme } from "./theme";
 import { Box, Button, Card, Grid, IconButton, Modal, styled } from "@mui/material";
-import { ethers } from "ethers";
 import { FormControl,FormControlLabel, Switch,FormGroup } from '@mui/material';
+import { ethers } from "ethers";
 import React, { useState } from 'react';
 
 const App = () => {
@@ -31,7 +31,7 @@ const App = () => {
   // A Web3Provider wraps a standard Web3 provider, which is
   // what MetaMask injects as window.ethereum into each page
   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const [walletAddress, setWalletAddress] = useState(0);
+  const [walletAddress, setWalletAddress] = useState('');
 
   if (typeof window.ethereum !== 'undefined') {
     console.log('MetaMask is installed!');
@@ -43,7 +43,7 @@ const App = () => {
     // window.ethereum.request({ method: 'eth_requestAccounts' });
     // MetaMask requires requesting permission to connect users accounts
     const accounts = await provider.send("eth_requestAccounts", []).then( (result)=> {
-      setWalletAddress(result[0]);
+      setWalletAddress(result[0].slice(0, 8)+ "...");
     });
     console.log(accounts);
     // await console.log(accounts[0]);
@@ -90,9 +90,15 @@ const App = () => {
         <RTL direction={appTheme.direction}>
           <CssBaseline />
           <Toaster toastOptions={toasterOptions} />
-          <Button onClick={metamask}>Connect wallet</Button>
-          <Button onClick={disconnect_metamask}>Disconnect wallet</Button>
-          <Button>{walletAddress}</Button>
+          <Grid container justifyContent="flex-end">
+            {walletAddress.length > 0 ? 
+            <Button>{walletAddress}</Button>
+            :
+            <Button variant="contained" onClick={metamask}>Connect wallet</Button>
+            }
+          </Grid>
+
+
           {allPages}
         </RTL>
       </ThemeProvider>

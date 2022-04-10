@@ -179,6 +179,8 @@ const resources = {
       Contact: "Contact",
       Privacy: "Privacy",
       Pricing: "Pricing",
+
+      "Our Serivces": "Our Services"
     },
   },
   es: {

@@ -23,7 +23,7 @@ const Progress = () => {
   return <Box pt={3} pb={5} px={3}>
       <H5 marginBottom={2}>{t("Progress")}</H5>
       <Grid container spacing={3}>
-        {[1, 2].map(item => <Grid item xs={12} sm={6} key={item}>
+        {[1, 2,3,4].map(item => <Grid item xs={12} sm={6} key={item}>
             <ProgressCard handleMoreOpen={handleMoreOpen} />
           </Grid>)}
 

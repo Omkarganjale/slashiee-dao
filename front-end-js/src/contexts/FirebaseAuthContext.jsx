@@ -2,9 +2,10 @@ import LoadingScreen from "components/LoadingScreen";
 // import { firebaseConfig } from "config";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { createUserWithEmailAndPassword, FacebookAuthProvider, getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, FacebookAuthProvider, getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup,signInWithCustomToken } from "firebase/auth";
 import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
 import { createContext, useEffect, useReducer } from "react";
+import { ethers } from "ethers";
 // firebase app initialize
 
 const firebaseConfig = {
@@ -57,6 +58,7 @@ const AuthContext = createContext({ ...initialState,
   login: (email, password) => Promise.resolve(),
   loginWithGoogle: () => Promise.resolve(),
   loginWithFacebook: () => Promise.resolve(),
+  loginWithWeb3: () => Promise.resolve(),
   logout: () => Promise.resolve()
 }); // props type
 
@@ -122,6 +124,42 @@ export const AuthProvider = ({
     return signInWithPopup(auth, provider);
   };
 
+   const loginWithWeb3 = () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const accounts = provider.send("eth_requestAccounts", []).then( (result)=> {
+      console.info("Login with Web3 Provider");
+
+      const userId = result[0];
+      const additionalClaims = {
+        premiumAccount: true,
+      };
+      const token =""; 
+      getAuth()
+        .createCustomToken(userId, additionalClaims)
+        .then((customToken) => {
+          // Send token back to client
+          token = customToken;
+        })
+        .catch((error) => {
+          console.log('Error creating custom token:', error);
+        });
+
+      return signInWithCustomToken(auth, token)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.info("user login : ", user);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ...
+      });;
+    });
+    
+  };
+
   const logout = () => auth.signOut();
 
   if (!state.isInitialized) {
@@ -138,7 +176,8 @@ export const AuthProvider = ({
     //@ts-ignore
     loginWithGoogle,
     //@ts-ignore
-    loginWithFacebook
+    loginWithFacebook,
+    loginWithWeb3
   }}>
       {children}
     </AuthContext.Provider>;

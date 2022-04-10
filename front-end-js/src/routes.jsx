@@ -62,6 +62,9 @@ const Chat = Loadable(lazy(() => import('./pages/Chat'))); // error
 
 const Error = Loadable(lazy(() => import('./pages/404'))); // routes
 
+//DAO
+const DaoHackDashboard = Loadable(lazy(() => import('./pages/dashboards/DaoHackDashboard')));
+
 const routes = [{
   path: '/',
   element: <Navigate to="dashboard" />
@@ -91,10 +94,19 @@ const routes = [{
   children: [{
     path: '',
     element: <DashboardSaaS />
-  }, {
+  }, 
+  {
     path: 'sales',
     element: <DashboardSales />
-  }, {
+  },
+  //DAO HACK
+  {
+    path: 'daodashboard',
+    element: <DaoHackDashboard />
+  },
+  
+  
+  {
     path: 'project-management',
     element: <DashboardProjectManagement />
   }, {

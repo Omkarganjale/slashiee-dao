@@ -12,12 +12,16 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { ethers } from "ethers";
+import React from 'react';
+
 
 const Login = () => {
   const {
     login,
     loginWithFacebook,
-    loginWithGoogle
+    loginWithGoogle, 
+    loginWithWeb3
   } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -51,10 +55,32 @@ const Login = () => {
         navigate("/dashboard");
       }).catch(error => {
         setError(error.message);
+        //TODO: navigate
+        navigate("/dashboard");
         setLoading(false);
       });
     }
   });
+
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const [walletAddress, setWalletAddress] = useState(0);
+
+  //TODO: error handling
+  async function metamask() {
+    console.log('Connecting');
+    // window.ethereum.request({ method: 'eth_requestAccounts' });
+    // MetaMask requires requesting permission to connect users accounts
+    const accounts = await provider.send("eth_requestAccounts", []).then( (result)=> {
+      setWalletAddress(result[0].slice(0, 6)+ "...");
+      navigate("/dashboard");
+
+    });
+    console.log(accounts);
+    // await console.log(accounts[0]);
+    // setWalletAddress(accounts[0]);
+    
+  }
+
   return <FlexBox sx={{
     alignItems: "center",
     flexDirection: "column",
@@ -69,11 +95,11 @@ const Login = () => {
       boxShadow: 1
     }}>
         <FlexBox alignItems="center" flexDirection="column" justifyContent="center" mb={5}>
-          <Box width={38} mb={1}>
+          <Box width={70} mb={1}>
             <img src="/static/logo/logo.svg" width="100%" alt="Uko Logo" />
           </Box>
           <H1 fontSize={24} fontWeight={700}>
-            Sign In to Uko
+            Wellcome to Slashiee Dao
           </H1>
         </FlexBox>
 
@@ -99,10 +125,16 @@ const Login = () => {
             </H3>
           </Divider>
 
-          <form noValidate onSubmit={handleSubmit} style={{
+
+          <H3>
+
+          Connect to finds awesome services and start earning
+
+          </H3>
+          <form noValidate onSubmit={metamask} style={{
           width: "100%"
         }}>
-            <FlexBox justifyContent="space-between" flexWrap="wrap">
+            {/* <FlexBox justifyContent="space-between" flexWrap="wrap">
               <TextFieldWrapper>
                 <Paragraph fontWeight={600} mb={1}>
                   Email
@@ -136,15 +168,17 @@ const Login = () => {
             textAlign: "center"
           }}>
                 {error}
-              </FormHelperText>}
+              </FormHelperText>} */}
 
+
+            
             <Box sx={{
             mt: 4
           }}>
               {loading ? <LoadingButton loading fullWidth variant="contained">
                   Sign In
                 </LoadingButton> : <Button fullWidth type="submit" variant="contained">
-                  Sign In
+                  Connect Wallet
                 </Button>}
             </Box>
           </form>
