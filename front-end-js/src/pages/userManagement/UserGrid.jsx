@@ -36,19 +36,19 @@ const UserGrid = () => {
   const handleAddUser = () => navigate("/dashboard/add-user");
 
   return <Box pt={2} pb={4}>
-      <StyledFlexBox>
-        <SearchInput placeholder="Search user..." />
-        <Button variant="contained" onClick={handleAddUser}>
-          {t("Add New User")}
-        </Button>
-      </StyledFlexBox>
+    <StyledFlexBox>
+      <SearchInput placeholder="Search user..." />
+      <Button variant="contained" onClick={handleAddUser}>
+        {t("Add New User")}
+      </Button>
+    </StyledFlexBox>
 
-      <Grid container spacing={3}>
-        {userList.map((user, index) => <Grid item md={4} sm={6} xs={12} key={index}>
-            <UserCard user={user} />
-          </Grid>)}
-      </Grid>
-    </Box>;
+    <Grid container spacing={3}>
+      {userList.map((user, index) => <Grid item md={4} sm={6} xs={12} key={index}>
+        <UserCard user={user} />
+      </Grid>)}
+    </Grid>
+  </Box>;
 };
 
 const userList = [{

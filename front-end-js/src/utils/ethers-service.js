@@ -10,8 +10,6 @@ export const getAddress = async () => {
   return accounts[0];
 }
 
-
-
 export const signText = (text) => {
 
   return ethersProvider.getSigner().signMessage(text);

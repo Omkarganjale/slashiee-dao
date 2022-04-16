@@ -8,10 +8,11 @@ import { Button, Card, Grid, Modal, styled } from "@mui/material";
 import { FormControl, FormControlLabel, Switch, FormGroup } from '@mui/material';
 import { ethers } from "ethers";
 import React from 'react';
-import { login } from 'utils/loginuser';
-import { createProfile } from 'utils/create-profile';
-import toast from "react-hot-toast";
+import { login } from 'utils/lens/loginuser';
+import { createProfile } from 'utils/lens/create-profile';
+import { secureLocalStorage } from "utils/secure-local-storage";
 import { StyledEngineProvider } from "@mui/styled-engine-sc";
+import toast from "react-hot-toast";
 
 
 const services = [{
@@ -44,36 +45,39 @@ const sleep = (milliseconds) => {
 
 /*Use like so*/
 
-async function timeSensativeAction(){ //must be async func
+async function timeSensativeAction() { //must be async func
   //do something here
   await sleep(5000) //wait 5 seconds
   //continue on...
 }
 
 async function lensOperation() {
+
+  const sls = new secureLocalStorage();
+  sls.setItem("a", "ABC");
+
   toast("Logging in to Lens.");
   await sleep(1000)
-  
+
   login();
   toast.success("Login to Lens Successfully!");
   console.log("Login SuccessFul");
   await sleep(2000)
-  
- 
+
+
   await sleep(2000)
   const createProfileRequest = {
-      "handle": "devABTest001",
-      "profilePictureUri": null,
-      "followNFTURI": null,
-      "followModule": null
-    };
+    "handle": "devABTest001",
+    "profilePictureUri": null,
+    "followNFTURI": null,
+    "followModule": null
+  };
 
 
-  const profile = await createProfile(createProfileRequest).catch(error => 
-    {
-      toast.error("Something wrong with Lens Operation. Please try again later.");
-    });
-    toast.success("Profile created successfully.");
+  const profile = await createProfile(createProfileRequest).catch(error => {
+    toast.error("Something wrong with Lens Operation. Please try again later.");
+  });
+  toast.success("Profile created successfully.");
   await sleep(2000)
 
   console.log("Profile created successfully", profile);
